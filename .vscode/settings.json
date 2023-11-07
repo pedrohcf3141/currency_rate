@@ -1,0 +1,10 @@
+{
+    "python.testing.cwd": "${workspaceFolder}/src",
+    "python.testing.pytestArgs": [
+        "--no-migrations",
+        "--rootdir=.",
+        "--cov"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}

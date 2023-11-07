@@ -1,0 +1,11 @@
+-r production.txt
+pip-tools
+pytest-django
+pytest-cov
+pre-commit
+flake8
+blue
+isort
+ipython
+django-extensions
+model_bakery

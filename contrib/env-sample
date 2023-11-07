@@ -1,0 +1,16 @@
+ENVIRONMENT=development
+USER_ID=1000
+
+APP_PORT=8000
+DB_PORT=5432
+
+POSTGRES_USER=currency_rate
+POSTGRES_PASSWORD=currency_rate
+POSTGRES_DB=currency_rate_test
+
+SECRET_KEY=teste
+DEBUG=True
+ALLOWED_HOSTS=localhost, 127.0.0.1
+DATABASE_URI=postgres://currency_rate:currency_rate@db/currency_rate_test
+
+SENTRY_DSN=

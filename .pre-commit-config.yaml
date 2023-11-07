@@ -1,0 +1,71 @@
+fail_fast: true
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+    - id: check-added-large-files
+      args: ['--maxkb=500']
+      stages: [commit]
+      language_version: python3.10
+    - id: check-byte-order-marker
+      stages: [commit]
+      language_version: python3.10
+    - id: check-case-conflict
+      stages: [commit]
+      language_version: python3.10
+    - id: check-merge-conflict
+      stages: [commit]
+      language_version: python3.10
+    - id: check-symlinks
+      stages: [commit]
+      language_version: python3.10
+    - id: debug-statements
+      stages: [commit]
+      language_version: python3.10
+    - id: detect-private-key
+      stages: [commit]
+      language_version: python3.10
+
+- repo: https://github.com/pycqa/isort
+  rev: 5.11.5
+  hooks:
+  - id: isort
+    language_version: python3.10
+    stages: [commit]
+    name: isort (python)
+    args: [--line-length=99, --profile=black]
+
+- repo: https://github.com/grantjenks/blue
+  rev: v0.9.1
+  hooks:
+  - id: blue
+    stages: [commit]
+    name: blue
+    language_version: python3.10
+    args: [--line-length=99]
+
+- repo: https://github.com/asottile/pyupgrade
+  rev: v3.3.1
+  hooks:
+  - id: pyupgrade
+    stages: [commit]
+    language_version: python3.10
+
+- repo: https://github.com/pycqa/flake8
+  rev: 6.0.0
+  hooks:
+  - id: flake8
+    stages: [commit]
+    language_version: python3.10
+    args: [--max-line-length=99]
+
+- repo: local
+  hooks:
+    - id: run-test-pre-push
+      name: run-test-pre-push
+      entry: ./run-test-pre-push.sh
+      language: system
+      pass_filenames: false
+      stages: [push]
+      always_run: true
+      verbose: true

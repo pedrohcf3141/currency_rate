@@ -1,0 +1,15 @@
+Django
+django-cors-headers
+djangorestframework
+django-filter
+python-decouple
+dj-database-url
+psycopg2-binary
+pyyaml
+uritemplate
+whitenoise
+gunicorn
+sentry-sdk
+requests
+workadays
+django-widget-tweaks
