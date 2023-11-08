@@ -3,7 +3,7 @@ from rest_framework.schemas import get_schema_view
 
 from .health_check import HealthCheckAPIView
 from .swagger import SwaggerView
-
+from currency_rate.quotes.views import CurrencyQuoteListView
 
 urlpatterns = [
     path(
@@ -25,5 +25,6 @@ urlpatterns = [
         name='openapi-schema',
     ),
     path('swagger/', SwaggerView.as_view(), name='swagger-ui'),
+    path('', CurrencyQuoteListView.as_view()),
 
 ]
