@@ -480,6 +480,7 @@ pytest==7.2.0 \
     # via
     #   pytest-cov
     #   pytest-django
+    #   pytest-responses
 pytest-cov==4.0.0 \
     --hash=sha256:2feb1b751d66a8bd934e5edfa2e961d11309dc37b73b0eabe73b5945fee20f6b \
     --hash=sha256:996b79efde6433cdbd0088872dbc5fb3ed7fe1578b68cdbba634f14bb8dd0470
@@ -487,6 +488,9 @@ pytest-cov==4.0.0 \
 pytest-django==4.5.2 \
     --hash=sha256:c60834861933773109334fe5a53e83d1ef4828f2203a1d6a0fa9972f4f75ab3e \
     --hash=sha256:d9076f759bb7c36939dbdd5ae6633c18edfc2902d1a69fdbefd2426b970ce6c2
+    # via -r /opt/currency_rate/requirements/development.in
+pytest-responses==0.5.1 \
+    --hash=sha256:4172e565b94ac1ea3b10aba6e40855ad60cd7f141476b2d8a47e4b5f250be734
     # via -r /opt/currency_rate/requirements/development.in
 python-dateutil==2.8.2 \
     --hash=sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86 \
@@ -548,10 +552,17 @@ pyyaml==6.0 \
     # via
     #   -r /opt/currency_rate/requirements/production.txt
     #   pre-commit
+    #   responses
 requests==2.31.0 \
     --hash=sha256:58cd2187c01e70e6e26505bca751777aa9f2ee0b7f4300988b709f44e013003f \
     --hash=sha256:942c5a758f98d790eaed1a29cb6eefc7ffb0d1cf7af05c3d2791656dbd6ad1e1
-    # via -r /opt/currency_rate/requirements/production.txt
+    # via
+    #   -r /opt/currency_rate/requirements/production.txt
+    #   responses
+responses==0.24.0 \
+    --hash=sha256:060be153c270c06fa4d22c1ef8865fdef43902eb595204deeef736cddb62d353 \
+    --hash=sha256:3df82f7d4dcd3e5f61498181aadb4381f291da25c7506c47fe8cb68ce29203e7
+    # via pytest-responses
 sentry-sdk==1.34.0 \
     --hash=sha256:76dd087f38062ac6c1e30ed6feb533ee0037ff9e709974802db7b5dbf2e5db21 \
     --hash=sha256:e5d0d2b25931d88fa10986da59d941ac6037f742ab6ff2fce4143a27981d60c3
@@ -599,6 +610,7 @@ urllib3==2.0.7 \
     # via
     #   -r /opt/currency_rate/requirements/production.txt
     #   requests
+    #   responses
     #   sentry-sdk
 virtualenv==20.19.0 \
     --hash=sha256:37a640ba82ed40b226599c522d411e4be5edb339a0c0de030c0dc7b646d61590 \

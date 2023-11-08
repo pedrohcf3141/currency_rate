@@ -4,8 +4,8 @@ from .views import CurrencyQuoteModelViewSet, CurrencyModelViewSet, CurrencyQuot
 
 
 router = DefaultRouter()
-router.register(r'currency_quotes', CurrencyQuoteModelViewSet)
-router.register(r'currencies', CurrencyModelViewSet)
+router.register(r'currencies', CurrencyModelViewSet, basename='currency')
+router.register(r'currency_quotes', CurrencyQuoteModelViewSet, basename='currency-quote')
 
 
 urlpatterns = [

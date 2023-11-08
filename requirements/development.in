@@ -9,3 +9,4 @@ isort
 ipython
 django-extensions
 model_bakery
+pytest-responses
