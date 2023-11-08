@@ -31,6 +31,15 @@ Bônus:
 * Criar uma api para realizar leitura das cotações persistidas no banco de dados.
 
 
+### Deploy 
+
+A aplicação esta no endpoint https://currency-rate-render-app2.onrender.com
+
+Mais informações podem ser vistas em https://currency-rate-render-app2.onrender.com/openapi/
+
+
+
+
 ### Instalação e Execução
 
 **Requisitos:** Docker e docker-compose
