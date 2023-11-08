@@ -42,11 +42,16 @@ def get_or_create_currency_quotes_by_dates(start_date: date, end_date: date, cur
             if currency_code == CurrencyType.DOLAR:
                 for currency in currencies_quotes:
                     c_code = Currency.objects.get(code=currency['currency_code'])
-                    CurrencyQuote.objects.get_or_create(
+                    currency_quote = CurrencyQuote.objects.filter(
                         currency=c_code,
-                        date=datetime.strptime(currency['date'], '%Y-%m-%d').date(),
-                        exchange_rate=currency['exchange_rate']
-                )
+                        date=datetime.strptime(currency['date'], '%Y-%m-%d').date()
+                    )
+                    if not currency_code:
+                        CurrencyQuote.objects.create(
+                            currency=c_code,
+                            date=datetime.strptime(currency['date'], '%Y-%m-%d').date(),
+                            exchange_rate=currency['exchange_rate']
+                        )
     for lista in data:
         for d in lista:
             if d['currency_code'] != currency_code:
