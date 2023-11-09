@@ -1,6 +1,7 @@
 {% load widget_tweaks %}
 
 <html>
+
 <head>
    <title>Gráfico de Cotações de Moedas</title>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -13,18 +14,21 @@
          align-items: center;
          height: 100vh;
       }
+
       .center-content h1 {
-      text-align: center;
-   }
-   .form-field{
-  width: 50%; /* Ajuste o valor de largura conforme necessário */
-}
+         text-align: center;
+      }
+
+      .form-field {
+         width: 50%;
+         /* Ajuste o valor de largura conforme necessário */
+      }
+
       /* Estilo para o contêiner do gráfico */
       #chart-container {
          min-width: 400px;
          height: 400px;
       }
-      
    </style>
 </head>
 
@@ -41,7 +45,7 @@
             <tr>
                <td>{% render_field search_form.start_date type="date" class="form-control" %}</td>
                <td>{% render_field search_form.end_date type="date" class="form-control" %}</td>
-               <td>{{ search_form.code}}</td>
+               <td>{% render_field search_form.code class="form-control" %}</td>
                <td colspan="3">
                   <input type="submit" value="Filtrar" class="btn btn-primary">
                </td>
@@ -52,74 +56,74 @@
                <td>{{ search_form.code.errors }}</td>
             </tr>
             <tr>
-               
+
             </tr>
          </table>
-      </form>      
+      </form>
    </div>
 
    <!-- Contêiner para o gráfico -->
    <div class="container" id="chart-container"></div>
    <script>
       document.addEventListener("DOMContentLoaded", function () {
-         var contextData = {{ currency_quotes|safe }};
-         var seriesData = {};
-   
-         // Organize os dados em séries com base em currency_code
-         contextData.forEach(function (item) {
-            var date = new Date(item.date).getTime();
-            var currencyCode = item.currency_code;
-            var exchangeRate = parseFloat(item.exchange_rate);
-   
-            if (!seriesData[currencyCode]) {
-               seriesData[currencyCode] = {
-                  name: currencyCode,
-                  data: []
-               };
-            }
-   
-            seriesData[currencyCode].data.push([date, exchangeRate]);
-         });
-   
-         var series = [];
-   
-         for (var currencyCode in seriesData) {
-            if (seriesData.hasOwnProperty(currencyCode)) {
-               series.push(seriesData[currencyCode]);
-            }
-         }
-   
-         const chartOptions = {
-            chart: {
-               type: 'line',
-            },
-            title: {
-               text: 'Gráfico de Cotações de Moedas'
-            },
-            xAxis: {
-               type: 'datetime',
-               title: {
-                  text: 'Data'
-               }
+      var contextData = {{ currency_quotes|safe }};
+      var seriesData = {};
 
-            },
-            yAxis: {
-               type: 'logarithmic',
-               title: {
-                  text: 'Valor (Escala Logarítmica)'
-               },
-               tickInterval: 3
-            },
-            legend: {
-               layout: 'vertical',
-               align: 'left',
-               verticalAlign: 'middle'
-            },
-            series: series
-         };
-         Highcharts.chart('chart-container', chartOptions);
+      contextData.forEach(function (item) {
+         var date = new Date(item.date_str).getTime();
+         var currencyCode = item.currency__code;
+         var exchangeRate = item.exchange_rate_float;
+         if (!seriesData[currencyCode]) {
+            seriesData[currencyCode] = {
+               name: currencyCode,
+               data: []
+            };
+         }
+
+         seriesData[currencyCode].data.push([date, exchangeRate]);
       });
-   </script>   
+      var series = [];
+
+      for (var currencyCode in seriesData) {
+         if (seriesData.hasOwnProperty(currencyCode)) {
+            series.push(seriesData[currencyCode]);
+         }
+      }
+
+      const chartOptions = {
+         chart: {
+            type: 'line',
+         },
+         title: {
+            text: 'Gráfico de Cotações de Moedas'
+         },
+         xAxis: {
+            type: 'datetime',
+            title: {
+               text: 'Data'
+            }
+         },
+         yAxis: {
+            // type: 'logarithmic',
+            title: {
+               text: 'Valor'
+            },
+            // tickInterval: 0.1
+         },
+         legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'middle'
+         },
+         series: series
+      };
+
+      Highcharts.chart('chart-container', chartOptions);
+});
+
+   </script>
+
    <script src="https://code.highcharts.com/highcharts.js"></script>
 </body>
+
 </html>

@@ -6,14 +6,6 @@ from decouple import config
 from gunicorn import glogging
 
 
-class CustomGunicornLogger(glogging.Logger):
-    def access(self, resp, req, environ, request_time):
-        # disable healthcheck logging
-        if req.path in ['/api/health/']:
-            return
-        super().access(resp, req, environ, request_time)
-
-
 # Ambiente atual (development, homologation, production)
 ENVIRONMENT = config('ENVIRONMENT')
 
@@ -29,13 +21,14 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=lambda v: [s.strip() for s in v.split(',')])
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS', default='', cast=lambda v: [s.strip() for s in v.split(',')]
+)
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    # Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,12 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    # Apps externas
     'rest_framework',
     'rest_framework.authtoken',
     'currency_rate.quotes',
     'widget_tweaks',
-
 ]
 
 DEV_APPS = ['django_extensions']
@@ -58,7 +49,7 @@ if ENVIRONMENT == 'development':
 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",
+    'http://localhost:8080',
 ]
 
 MIDDLEWARE = [
@@ -101,7 +92,6 @@ DATABASES = {
     'default': dj_database_url.config(
         env='DATABASE_URI',
         conn_max_age=600,
-        conn_health_checks=True,
     )
 }
 # Password validation
@@ -165,8 +155,4 @@ REST_FRAMEWORK = {
     ],
 }
 
-if not DEBUG:
-    sentry_sdk.init(
-        dsn=config('SENTRY_DSN'),
-        traces_sample_rate=1.0,
-    )
+VATCOMPLY_URL = 'https://api.vatcomply.com/rates'

@@ -36,7 +36,7 @@ Bônus:
 A aplicação esta no endpoint https://currency-rate-render-app2.onrender.com
 
 Mais informações podem ser vistas em https://currency-rate-render-app2.onrender.com/openapi/
-
+Mais informações podem ser vistas em https://currency-rate-render-app2.onrender.com/swagger/  
 
 
 

@@ -1,4 +1,4 @@
-class CurrencyType():
+class CurrencyType:
     """
     Tipos de Cotação
     """

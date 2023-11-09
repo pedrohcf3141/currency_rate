@@ -1,20 +1,6 @@
-from unittest.mock import patch
-
-from django.db.utils import OperationalError
 from django.urls import reverse
 
 from currency_rate.pagination import CustomPageNumberPagination
-
-
-def test_health_check_url(client, db):
-    response = client.get(reverse('health_check'))
-    assert response.status_code == 200
-
-
-def test_health_check_url_operationalerror(client, db):
-    with patch('django.db.connection.ensure_connection', side_effect=OperationalError):
-        response = client.get(reverse('health_check'))
-        assert response.status_code == 503
 
 
 def test_openapi_schema_url(client):

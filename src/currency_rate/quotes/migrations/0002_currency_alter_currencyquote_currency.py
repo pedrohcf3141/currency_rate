@@ -14,13 +14,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Currency',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name='ID'
+                    ),
+                ),
                 ('code', models.CharField(max_length=3)),
             ],
         ),
         migrations.AlterField(
             model_name='currencyquote',
             name='currency',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='quotes.currency'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to='quotes.currency'
+            ),
         ),
     ]

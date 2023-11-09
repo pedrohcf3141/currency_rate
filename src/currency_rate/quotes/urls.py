@@ -9,6 +9,6 @@ router.register(r'currency_quotes', CurrencyQuoteModelViewSet, basename='currenc
 
 
 urlpatterns = [
-   path('', include(router.urls)),
-   path('chart/', CurrencyQuoteListView.as_view()),
+    path('', include(router.urls)),
+    path('chart/', CurrencyQuoteListView.as_view()),
 ]

@@ -9,6 +9,9 @@ class CurrencyQuote(models.Model):
     def __str__(self):
         return f'{self.date} - {self.currency}'
 
+    class Meta:
+        unique_together = ('date', 'currency')
+
 
 class Currency(models.Model):
     code = models.CharField(max_length=3)

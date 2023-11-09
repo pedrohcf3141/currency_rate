@@ -8,22 +8,19 @@ class CurrencyQuoteSerializer(serializers.ModelSerializer):
     """
 
     currency = serializers.CharField(source='currency.code')
+
     class Meta:
         model = CurrencyQuote
-        fields = [
-            'date',
-            'currency',
-            'exchange_rate'
-        ]
+        fields = ['date', 'currency', 'exchange_rate']
 
 
 class CurrencySerializer(serializers.ModelSerializer):
     """
     Serializer para Modelo Currency
     """
-   
+
     class Meta:
-       model = Currency
-       fields = [
-           'code',
-       ]
+        model = Currency
+        fields = [
+            'code',
+        ]
